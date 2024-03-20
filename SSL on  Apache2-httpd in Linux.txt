@@ -93,9 +93,9 @@ copy TrustedRoot.crt DigiCertCA.crt Yourdomain.crt /etc/httpd/ssl/
 
 #cat Yourdomain.crt DigiCertCA.crt TrustedRoot.crt  >> sslbundle.crt
 
-+++++++++++++++++++++++++++++++++++++
-+ Edit the Nginx virtual hosts file +
-+++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++
++ Edit the Apache2 virtual hosts file +
++++++++++++++++++++++++++++++++++++++++
 #Find to .conf file for locate ssl configuration file.
 
 find ssl.conf
