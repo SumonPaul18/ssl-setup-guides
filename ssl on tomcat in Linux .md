@@ -28,17 +28,17 @@ keytool -genkey -keysize 2048 -keyalg RSA -alias server -keystore nsderp.navy.mi
 
 #### You will then get a prompt asking you to input the following details regarding your CSR:
 
-What is your First and Last Name: nsderp.navy.mil.bd [Enter your domain name]
+<b>What is your First and Last Name:</b> nsderp.navy.mil.bd [Enter your domain name]
 
-What is the name of your organizational unit: Bangladesh Navy [Enter the organizational unit]
+<b>What is the name of your organizational unit:</b> Bangladesh Navy [Enter the organizational unit]
 
-What is the name of your organization: NSD 
+<b>What is the name of your organization:</b> NSD 
 
-What is the name of your city or locality: CHITTAGONG
+<b>What is the name of your city or locality:</b> CHITTAGONG
 
-What is the name of your State or Province: CHITTAGONG 
+<b>What is the name of your State or Province:</b> CHITTAGONG 
 
-What is the two-letter country code for this unit: BD 
+<b>What is the two-letter country code for this unit:</b> BD 
 
 #### Confirm that all the above stated information is correct by typing: yes.
 
