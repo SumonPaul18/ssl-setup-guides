@@ -49,11 +49,13 @@ What is the two-letter country code for this unit: BD
 keytool -certreq -keyalg RSA -alias server -file nsderp.navy.mil.bd.csr -keystore nsderp.navy.mil.bd.jks
 ~~~
 #### Check the CSR text:
+~~~
 openssl req -text -in nsderp.navy.mil.bd.csr 
-
+~~~
 #### view CSR file:
+~~~
 cat nsderp.navy.mil.bd.csr
-
+~~~
 #### Step 2. Order the SSL Certificate:
 Now we need to order an SSL Certificate from global ssl providers.
 
@@ -79,37 +81,45 @@ Now collect/download our certificate in .cer format as individual files.
 ~~~
 scp -rv [file-name.type] root@ourwebserverip:/etc/ssl	[linux-paste-directory]
 ~~~
-#Unzip certificates zip file:
+#### Unzip certificates zip file:
+~~~
 unzip archive.zip
+~~~
+#### Step 3. Import the SSL Certificates :
 
-#Step 3. Import the SSL Certificates :
+#### Note: Import the 3 certificates by order:
+1st import (TrustedRoot.crt)
 
-#Note: Import the 3 certificates by order:
-#1st import (TrustedRoot.crt)
-#2nd import (DigiCertCA.crt)
-#3rd import (ourdomain.crt)
+2nd import (DigiCertCA.crt)
 
-#import your main certificate:
+3rd import (ourdomain.crt)
+
+#### import your main certificate:
+~~~
 keytool -import -trustcacerts -alias root -keystore nsderp.navy.mil.bd.jks -file /etc/ssl/cert2023/TrustedRoot.crt
-
-#import any intermediate certificates:
+~~~
+#### import any intermediate certificates:
+~~~
 keytool -import -trustcacerts -alias intermed -keystore nsderp.navy.mil.bd.jks -file /etc/ssl/cert2023/DigiCertCA.crt
-
-#import the root certificate:
+~~~
+#### import the root certificate:
+~~~
 keytool -import -trustcacerts -alias server -keystore nsderp.navy.mil.bd.jks -file /etc/ssl/cert2023/nsderp_navy_mil_bd.crt
+~~~
 
+#### Step 4. Configure the server.xml file:
 
-#Step 4. Configure the server.xml file:
-
-#Navigate to this directory:
-#By default Tomcat Installation location are:
+#### Navigate to this directory:
+By default Tomcat Installation location are:
+~~~
 cd /opt/tomcat/conf
- 
-#edit the server.xml file
+~~~
+#### edit the server.xml file
+~~~
 nano server.xml
-
-#After that, scroll down to the connector config part and add the following lines to enable HTTPS on your Tomcat Server.
-
+~~~
+#### After that, scroll down to the connector config part and add the following lines to enable HTTPS on your Tomcat Server.
+~~~
   <Connector port="8443" protocol="HTTP/1.1"
   connectionTimeout="20000"
   redirectPort="8443"
@@ -119,46 +129,49 @@ nano server.xml
   sslProtocol="TLSv1.2"
   keystoreFile="/etc/ssl/yourdomain.com.jks"
   keystorePass="Your-Password" />
+~~~
 
-
-#Restart Tomcat
+#### Restart Tomcat
+~~~
 systemctl restart tomcat8	[replace our tomcat version tomcat8,9]
-
+~~~
+~~~
 systemctl status tomcat8
-
-#Restart Tomcat without systemctl command
-
+~~~
+#### Restart Tomcat without systemctl command
+~~~
 cd /U01/apache-tomcat-7.0.63/bin/
-
+~~~
+~~~
 ./startup.sh
-
-#Step 5. Check the SSL Installation:
+~~~
+#### Step 5. Check the SSL Installation:
 Go to> www.ssllabs.com/ssltest/
 
 Paste: ourwebserver URL		[https://www.yourdomain.com]
 
-+++++++++++ Complete Installation/Renew SSL Certificate +++++++++++
+#### Complete Installation/Renew SSL Certificate
 
-++++++++++++++++++++++++++++++++++++++++
-+ Error and Troubleshoot on Tomcat SSL +
-++++++++++++++++++++++++++++++++++++++++
+#
+# Error and Troubleshoot on Tomcat SSL
 
-#Error Message
+
+#### Error Message
 keytool error: java.lang.Exception: Failed to establish chain from reply
 
-#Cause
+#### Cause
 Old certificate exist and Root/Intermediate certificates have not been imported properly or in the correct order.
 
-#Solution
+#### Solution
 If Root and/or Intermediate certificates have already been imported, remove them.
 
-2. View the pervious keystore/ssl
-
+1. View the pervious keystore/ssl
+~~~
 keytool -list -keystore nsderp.navy.mil.bd.jks [select your keystore .jks file]
-
-1. Run the following command:
-#note: In server.xml file has locate our perviours alias name. 
-
+~~~
+2. Run the following command:
+#### note: In server.xml file has locate our perviours alias name. 
+~~~
 keytool -delete -alias mydomain -keystore nsderp.navy.mil.bd.jks [select your keystore .jks file]
-
-++++++++++++++++++++++++++++++++++++++++ End ++++++++++++++++++++++++++++++++++++++++
+~~~
+#
