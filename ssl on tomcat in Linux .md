@@ -29,10 +29,15 @@ keytool -genkey -keysize 2048 -keyalg RSA -alias server -keystore nsderp.navy.mi
 #### You will then get a prompt asking you to input the following details regarding your CSR:
 
 What is your First and Last Name: nsderp.navy.mil.bd [Enter your domain name]
+
 What is the name of your organizational unit: Bangladesh Navy [Enter the organizational unit]
+
 What is the name of your organization: NSD 
+
 What is the name of your city or locality: CHITTAGONG
+
 What is the name of your State or Province: CHITTAGONG 
+
 What is the two-letter country code for this unit: BD 
 
 #### Confirm that all the above stated information is correct by typing: yes.
@@ -40,36 +45,40 @@ What is the two-letter country code for this unit: BD
 #### After you hit Enter, your Keystore should be generated in the selected directory.
 
 #### Generate the CSR: 
+~~~
 keytool -certreq -keyalg RSA -alias server -file nsderp.navy.mil.bd.csr -keystore nsderp.navy.mil.bd.jks
+~~~
+#### Check the CSR text:
+openssl req -text -in nsderp.navy.mil.bd.csr 
 
-#Check the CSR text:
-#openssl req -text -in nsderp.navy.mil.bd.csr 
-
-#view CSR file:
+#### view CSR file:
 cat nsderp.navy.mil.bd.csr
 
-#Step 2. Order the SSL Certificate:
+#### Step 2. Order the SSL Certificate:
 Now we need to order an SSL Certificate from global ssl providers.
 
 we need to the CSR file when purchase ssl certificate.
 
-#Select Server Type as your web server enginee:
-
+#### Select Server Type as your web server enginee:
 Apache
+
 Nginx
+
 Java Based Server
+
 etc
 
-#Here we need to select the Authentication Method to validate your domain name.
+#### Here we need to select the Authentication Method to validate your domain name.
 
 email
 
-#Download certificate file from ssl provider portal:
+#### Download certificate file from ssl provider portal:
 Now collect/download our certificate in .cer format as individual files. 
 
-#Upload these certificate files to webserver via FTP or SCP.
+#### Upload these certificate files to webserver via FTP or SCP.
+~~~
 scp -rv [file-name.type] root@ourwebserverip:/etc/ssl	[linux-paste-directory]
-
+~~~
 #Unzip certificates zip file:
 unzip archive.zip
 
