@@ -1,29 +1,32 @@
+#
+# Install/Renew SSL Certificate In Tomcat on Linux
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++
-+ Install/Renew SSL Certificate In Tomcat on Linux +
-++++++++++++++++++++++++++++++++++++++++++++++++++++
-#To renew SSL Certificate in Tomcat, you can follow the steps below.
+### To renew SSL Certificate in Tomcat, you can follow the steps below.
 
-#check tomcat status
+#### check tomcat status
+~~~
 systemctl status tomcat.service
-
-#check that Java is installed
+~~~
+#### check that Java is installed
+~~~
 java --version
+~~~
+#### Step 1. Generating a Keystore and CSR
 
-#Step 1. Generating a Keystore and CSR
-
-#Navigate to the default OpenSSL SSL directory
+#### Navigate to the default OpenSSL SSL directory
+~~~
 cd /etc/ssl
+~~~
+#### Take Backup the old keystore file and SSL Cerfificates files with server.xml file
 
-#Take Backup the old keystore file and SSL Cerfificates files with server.xml file
 
-
-#Create the Keystore:
+#### Create the Keystore:
+~~~
 keytool -genkey -keysize 2048 -keyalg RSA -alias server -keystore nsderp.navy.mil.bd.jks
+~~~
+#### Enter the Keystore Password: (Make sure it is something you remember as you will need the password to access your keystore later)
 
-#Enter the Keystore Password: (Make sure it is something you remember as you will need the password to access your keystore later)
-
-#You will then get a prompt asking you to input the following details regarding your CSR:
+#### You will then get a prompt asking you to input the following details regarding your CSR:
 
 What is your First and Last Name: nsderp.navy.mil.bd [Enter your domain name]
 What is the name of your organizational unit: Bangladesh Navy [Enter the organizational unit]
@@ -32,11 +35,11 @@ What is the name of your city or locality: CHITTAGONG
 What is the name of your State or Province: CHITTAGONG 
 What is the two-letter country code for this unit: BD 
 
-#Confirm that all the above stated information is correct by typing: yes.
+#### Confirm that all the above stated information is correct by typing: yes.
 
-#After you hit Enter, your Keystore should be generated in the selected directory.
+#### After you hit Enter, your Keystore should be generated in the selected directory.
 
-#Generate the CSR: 
+#### Generate the CSR: 
 keytool -certreq -keyalg RSA -alias server -file nsderp.navy.mil.bd.csr -keystore nsderp.navy.mil.bd.jks
 
 #Check the CSR text:
