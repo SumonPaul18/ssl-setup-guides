@@ -1,59 +1,60 @@
+## Install SSL on Apache2 in Linux
 
-+++++++++++++++++++++++++++++++++++
-+ Install SSL on Apache2 in Linux +
-+++++++++++++++++++++++++++++++++++
 
-#To install/renew SSL Certificate in Apache2, you can follow the steps below.
+#### To install/renew SSL Certificate in Apache2, you can follow the steps below.
 
-#First we browse the website and check ssl cert have active or not expried.
-#Go to the server, and check apache2 service status.
-#Find apache2 configuration files where have ssl.conf file and check in the file sslengine on/off, we can see website source file location, certificate locations. 
+#### First we browse the website and check ssl cert have active or not expried.
+#### Go to the server, and check apache2 service status.
+#### Find apache2 configuration files where have ssl.conf file and check in the file sslengine on/off, we can see website source file location, certificate locations. 
 
-#check apache status
-
+#### check apache status
+~~~
 systemctl status httpd
-
-#By default apache2 ssl.conf file in exist
-#apache2 called httpd. 
-
+~~~
+#### By default apache2 ssl.conf file in exist
+#### apache2 called httpd. 
+~~~
 cat /etc/httpd/conf.d/ssl.conf
+~~~
 
-++++++++++++++++++++++++++++++++++++
-+ Generating a Private key and CSR +
-++++++++++++++++++++++++++++++++++++
+#### Generating a Private key and CSR
 
-# Two ways can generate private key and csr.
+
+#### Two ways can generate private key and csr.
 1. Online
+   
 2. Command Line
 
-#1: Generate CSR from Online:
-#From a browser search [ Generate csr from online ] we can see some online csr generated website. Then choose any trusted website and generate csr with private key. 
+#### 1: Generate CSR from Online:
+#### From a browser search [ Generate csr from online ] we can see some online csr generated website. Then choose any trusted website and generate csr with private key. 
 
-#Bellow listing some trusted csr generated link.
+#### Bellow listing some trusted csr generated link.
 1. https://www.ssl.com/online-csr-and-key-generator/
+
 2. https://csrgenerator.com/
+
 3. https://decoder.link/csr_generator
 
 Access any link and filup there form as your domain information. Then click generate button and download or copy paste csr & key file.
 
-#2: Generate CSR from Command Line:
+#### 2: Generate CSR from Command Line:
 
-#This way we need to access that server terminal and run a single line command for generate private key and csr.
+#### This way we need to access that server terminal and run a single line command for generate private key and csr.
 
-#Create a Directory, where store Private key and CSR file.
-
+#### Create a Directory, where store Private key and CSR file.
+~~~
 mkdir -p /etc/httpd/ssl/
-
 chmod 700 /etc/httpd/ssl/
-
-#Navigate the directory and run bellow command.
-
+~~~
+#### Navigate the directory and run bellow command.
+~~~
 cd /etc/httpd/ssl/
-
+~~~
+~~~
 openssl req -new -newkey rsa:2048 -nodes -keyout exampledomain.com.key -out exampledomain.com.csr
-
-#Enter the following CSR details when prompted:
-#Common Name:www.paulco.xyz - (website address) This is Too Important. 
+~~~
+#### Enter the following CSR details when prompted:
+#### Common Name:www.paulco.xyz - (website address) This is Too Important. 
 
 Common Name(CN): www.paulco.xyz
 Organization: Computing Technology
@@ -62,16 +63,16 @@ City or Locality: Dhaka
 State or Province: Dhaka
 Country: BD
 
-#We can see two file in this diretory
-
+#### We can see two file in this diretory
+~~~
 ls -ln
+~~~
+> exampledomain.com.key
+> exampledomain.com.csr
 
-exampledomain.com.key
-exampledomain.com.csr
+#### Now we need to the .csr file for baught paid SSL.
 
-#Now we need to the .csr file for baught paid SSL.
-
-#Create a backup the .key file as it will be required later when installing your SSL certificate in apache2.
+#### Create a backup the .key file as it will be required later when installing your SSL certificate in apache2.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 + Download certificate file from ssl provider portal +
