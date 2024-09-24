@@ -1,7 +1,4 @@
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++
-+ Install/Renew SSL Certificate In Nginx on Linux +
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+## Install/Renew SSL Certificate In Nginx on Linux 
 
 #To renew SSL Certificate in Nginx, you can follow the steps below.
 
