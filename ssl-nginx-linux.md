@@ -7,7 +7,7 @@
 systemctl status nginx
 ~~~
 
-#### Step 1: Generating a Private key and CSR.
+## Step 1: Generating a Private key and CSR.
 
 #### Two ways can generate private key and csr.
 1. Online
@@ -38,52 +38,58 @@ cd /etc/nginx/ssl/
 ~~~
 openssl req -new -newkey rsa:2048 -nodes -keyout exampledomain.com.key -out exampledomain.com.csr
 ~~~
-#Enter the following CSR details when prompted:
-
+#### Enter the following CSR details when prompted:
 Common Name(CN): CN is FQDN, www.paulco.xyz,cloud.paulco.xyz.
+
 Organization: The full legal name of your organization.
+
 Organization Unit (OU): Your department such as IT, Account, HR, etc.
+
 City or Locality: Where your organization is legally incorporated.
+
 State or Province: Where your organization is legally incorporated.
+
 Country: Two uppercase letters only Your Country Code: BD,US, etc.
 
-#We can see two file in this diretory
+#### We can see two file in this diretory
+~~~
 ls -ln
+~~~
+> exampledomain.com.key
+> exampledomain.com.csr
 
-exampledomain.com.key
-exampledomain.com.csr
+#### Now we need to the .csr file for baught paid SSL.
 
-#Now we need to the .csr file for baught paid SSL.
+#### Create a backup the .key file as it will be required later when installing your SSL certificate in Nginx.
 
-#Create a backup the .key file as it will be required later when installing your SSL certificate in Nginx.
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+ Step 2: Download certificate file from ssl provider portal +
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#upzip the .zip file in we got 3 files.
-#Note: The 3 certificates are.
+## Step 2: Download certificate file from ssl provider portal
 
+#### upzip the .zip file in we got 3 files.
+#### Note: The 3 certificates are.
 1. TrustedRoot.crt
+   
 2. DigiCertCA.crt
+
 3. Yourdomain.crt
 
-#Put this certificates file on /etc/nginx/ssl/ location.
+#### Put this certificates file on /etc/nginx/ssl/ location.
 
 
-#Some Times need to that.
-#Concatenate the primary and intermediate certificates
+#### Some Times need to that.
+#### Concatenate the primary and intermediate certificates
 
-#cat Yourdomain.crt DigiCertCA.crt TrustedRoot.crt  >> sslbundle.crt
+#### cat Yourdomain.crt DigiCertCA.crt TrustedRoot.crt  >> sslbundle.crt
 
-++++++++++++++++++++++++++++++++++++++++++++++
-+ Step 3: Edit the Nginx virtual hosts file  +
-++++++++++++++++++++++++++++++++++++++++++++++
-#Find to .conf file for locate ssl configuration file.
 
+## Step 3: Edit the Nginx virtual hosts file
+
+#### Find to .conf file for locate ssl configuration file.
+~~~
 sudo find nginx.conf
-
-#Default VirtualHost file is.
-
+~~~
+#### Default VirtualHost file is.
+~~~
 nano /etc/nginx/sites-available/default
 
 server {
@@ -104,24 +110,26 @@ server {
     index  index.html;
     }
     }
-    
-+++++++++++++++++++++++++++++++++++++
-+ Step 4: Systax Check and Restart  +
-+++++++++++++++++++++++++++++++++++++
+ ~~~   
 
-#Test the Nginx configuration.
+## Step 4: Systax Check and Restart
+
+
+#### Test the Nginx configuration.
+~~~
 nginx -t
-
-#Restart the Nginx services.
-
+~~~
+#### Restart the Nginx services.
+~~~
 nginx -s reload
-or
+~~~
+OR
+~~~
 systemctl restart nginx
+~~~
+#### check Now The Website is Secure.
 
-#check Now The Website is Secure.
+#### or check from online:
+[ssllabs.com](www.ssllabs.com/ssltest/)
 
-#or check from online:
-www.ssllabs.com/ssltest/
-
-
-++++++++++++++++++++++++++++++ End ++++++++++++++++++++++++++++++
+#
