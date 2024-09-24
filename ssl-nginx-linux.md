@@ -39,17 +39,17 @@ cd /etc/nginx/ssl/
 openssl req -new -newkey rsa:2048 -nodes -keyout exampledomain.com.key -out exampledomain.com.csr
 ~~~
 #### Enter the following CSR details when prompted:
-Common Name(CN): CN is FQDN, www.paulco.xyz,cloud.paulco.xyz.
+<b>Common Name(CN):</b> CN is FQDN, www.paulco.xyz, cloud.paulco.xyz.
 
-Organization: The full legal name of your organization.
+<b>Organization:</b> The full legal name of your organization.
 
-Organization Unit (OU): Your department such as IT, Account, HR, etc.
+<b>Organization Unit (OU):</b> Your department such as IT, Account, HR, etc.
 
-City or Locality: Where your organization is legally incorporated.
+<b>City or Locality:</b> Where your organization is legally incorporated.
 
-State or Province: Where your organization is legally incorporated.
+<b>State or Province:</b> Where your organization is legally incorporated.
 
-Country: Two uppercase letters only Your Country Code: BD,US, etc.
+<b>Country:</b> Two uppercase letters only Your Country Code: BD,US, etc.
 
 #### We can see two file in this diretory
 ~~~
