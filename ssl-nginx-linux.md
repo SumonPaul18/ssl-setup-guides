@@ -1,40 +1,43 @@
 ## Install/Renew SSL Certificate In Nginx on Linux 
 
-#To renew SSL Certificate in Nginx, you can follow the steps below.
+#### To renew SSL Certificate in Nginx, you can follow the steps below.
 
-#check nginx status
-
+#### check nginx status
+~~~
 systemctl status nginx
+~~~
 
-+++++++++++++++++++++++++++++++++++++++++++++
-+ Step 1: Generating a Private key and CSR. +
-+++++++++++++++++++++++++++++++++++++++++++++
-# Two ways can generate private key and csr.
+#### Step 1: Generating a Private key and CSR.
+
+#### Two ways can generate private key and csr.
 1. Online
 2. Command Line
 
-#1: Generate CSR from Online:
-#From a browser search [ Generate csr from online ] we can see some online csr generated website. Then choose any trusted website and generate csr with private key. 
-#Bellow listing some trusted csr generated link.
-1. https://www.ssl.com/online-csr-and-key-generator/
-2. https://csrgenerator.com/
-3. https://decoder.link/csr_generator
+#### 1: Generate CSR from Online:
+#### From a browser search [ Generate csr from online ] we can see some online csr generated website. Then choose any trusted website and generate csr with private key. 
+#### Bellow listing some trusted csr generated link.
+1. [ssl.com](https://www.ssl.com/online-csr-and-key-generator/)
+
+2. [csrgenerator.com](https://csrgenerator.com/)
+
+3. [decoder.link](https://decoder.link/csr_generator)
 
 Access any link and filup there form as your domain information. Then click generate button and download or copy paste csr & key file.
 
-#2: Generate CSR from Command Line:
-#This way we need to access that server terminal and run a single line command for generate private key and csr.
+#### 2: Generate CSR from Command Line:
+#### This way we need to access that server terminal and run a single line command for generate private key and csr.
 
-#Create a Directory, where store Private key and CSR file.
-
+#### Create a Directory, where store Private key and CSR file.
+~~~
 mkdir -p /etc/nginx/ssl/
-
-#Navigate the directory and run bellow command.
-
+~~~
+#### Navigate the directory and run bellow command.
+~~~
 cd /etc/nginx/ssl/
-
+~~~
+~~~
 openssl req -new -newkey rsa:2048 -nodes -keyout exampledomain.com.key -out exampledomain.com.csr
-
+~~~
 #Enter the following CSR details when prompted:
 
 Common Name(CN): CN is FQDN, www.paulco.xyz,cloud.paulco.xyz.
