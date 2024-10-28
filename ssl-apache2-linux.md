@@ -31,7 +31,7 @@ cat /etc/httpd/conf.d/ssl.conf
 #### Bellow listing some trusted csr generated link.
 1. https://www.ssl.com/online-csr-and-key-generator/
 
-2. https://csrgenerator.com/
+2. https://www.ssltrust.com.au/ssl-tools/generate-csr
 
 3. https://decoder.link/csr_generator
 
