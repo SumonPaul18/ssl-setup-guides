@@ -74,43 +74,47 @@ ls -ln
 
 #### Create a backup the .key file as it will be required later when installing your SSL certificate in apache2.
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+ Download certificate file from ssl provider portal +
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#upzip the .zip file in we got 3 files.
-#Note: The 3 certificates are.
+
+### Download certificate file from ssl provider portal
+
+upzip the .zip file in we got 3 files.
+
+Note: The 3 certificates are.
 
 1. TrustedRoot.crt
+
 2. DigiCertCA.crt
+   
 3. Yourdomain.crt
 
-#Put this certificates file on /etc/httpd/ssl/ location.
+Put this certificates file on ```/etc/httpd/ssl/``` location.
 
-copy TrustedRoot.crt DigiCertCA.crt Yourdomain.crt /etc/httpd/ssl/
+```copy TrustedRoot.crt DigiCertCA.crt Yourdomain.crt /etc/httpd/ssl/```
 
 
-#Some Times need to that.
-#Concatenate the primary and intermediate certificates
+Some Times need to that.
 
-#cat Yourdomain.crt DigiCertCA.crt TrustedRoot.crt  >> sslbundle.crt
+Concatenate the primary and intermediate certificates
 
-+++++++++++++++++++++++++++++++++++++++
-+ Edit the Apache2 virtual hosts file +
-+++++++++++++++++++++++++++++++++++++++
-#Find to .conf file for locate ssl configuration file.
+```cat Yourdomain.crt DigiCertCA.crt TrustedRoot.crt  >> sslbundle.crt```
 
-find ssl.conf
 
-find / -name "ssl.conf"
+#### Edit the Apache2 virtual hosts file
 
-#or 
+Find to .conf file for locate ssl configuration file.
 
-locate ssl.conf
+```find ssl.conf```
 
-locate .conf
+```find / -name "ssl.conf"```
 
-#Default VirtualHost file is.
+OR
 
+```locate ssl.conf```
+
+```locate .conf```
+
+#### Default VirtualHost file is.
+```
 <VirtualHost *:443>
 DocumentRoot /var/www/html
 ServerName www.paulco.xyz
@@ -120,50 +124,61 @@ SSLCertificateKeyFile /etc/httpd/ssl/private.key
 SSLCertificateChainFile /etc/httpd/ssl/nssd_navy_mil_bd.crt
 SSLCACertificateFile /etc/httpd/ssl/My_CA_Bundle.ca-bundle
 </VirtualHost>
+```
 
-+++++++++++++++++++++
-+ Redirect to HTTPS +
-+++++++++++++++++++++
+#### Redirect to HTTPS
 
-#To redirect traffic to become SSL encrypted, go ahead and open a file ending in .conf in the /etc/httpd/conf.d directory:
 
+To redirect traffic to become SSL encrypted, go ahead and open a file ending in .conf in the /etc/httpd/conf.d directory:
+```
 nano /etc/httpd/conf/httpd.conf
-
+```
+```
 <VirtualHost *:80>
         ServerName www.example.com
         Redirect "/" "https://www.paulco.xyz/"
 </VirtualHost>
+```
+Once completed, save and close the file.
 
-#Once completed, save and close the file.
 
-+++++++++++++++++++++++++++++
-+ Systax Check and Restart  +
-+++++++++++++++++++++++++++++
+#### Systax Check and Restart
 
+```
 apache2ctl -t
-
+```
+```
 apachectl configtest
-
+```
+```
 service apache2 restart
-
+```
+```
 systemctl restart httpd
-
-#service httpd restart
-
-#Apache service start/stop
+```
+```
+service httpd restart
+```
+#### Apache service start/stop
+```
 apachectl stop
+```
+```
 apachectl start
-
+```
+```
 service httpd status
+```
 
-+++++++++++++++++++++++++
-+ Some Basic Operation  +
-+++++++++++++++++++++++++
+#### Some Basic Operation
 
-#/etc/apache2/sites-enabled/your domain.conf
-
+```
+/etc/apache2/sites-enabled/your domain.conf
+```
+```
 netstat -tupan | grep -i http
-
+```
+```
 netstat -tulpn | grep --colorb:80
-
-++++++++++++++++++++++++++++++ End ++++++++++++++++++++++++++++++
+```
+--- 
