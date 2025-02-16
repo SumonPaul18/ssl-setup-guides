@@ -55,14 +55,14 @@ openssl req -new -newkey rsa:2048 -nodes -keyout exampledomain.com.key -out exam
 ~~~
 #### Enter the following CSR details when prompted:
 #### Common Name:www.paulco.xyz - (website address) This is Too Important. 
-
+```
 Common Name(CN): www.paulco.xyz
 Organization: Computing Technology
 Organization Unit (OU): IT
 City or Locality: Dhaka
 State or Province: Dhaka
 Country: BD
-
+```
 #### We can see two file in this diretory
 ~~~
 ls -ln
