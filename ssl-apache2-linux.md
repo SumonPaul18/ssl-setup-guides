@@ -89,7 +89,7 @@ Note: The 3 certificates are.
 
 Put this certificates file on ```/etc/httpd/ssl/``` location.
 
-```copy TrustedRoot.crt DigiCertCA.crt Yourdomain.crt /etc/httpd/ssl/```
+Copy TrustedRoot.crt DigiCertCA.crt Yourdomain.crt /etc/httpd/ssl/
 
 
 Some Times need to that.
