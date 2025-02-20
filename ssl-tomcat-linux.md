@@ -98,6 +98,7 @@ unzip archive.zip
 ~~~
 keytool -import -trustcacerts -alias root -keystore nsderp.navy.mil.bd.jks -file /etc/ssl/cert2023/TrustedRoot.crt
 ~~~
+Do you still want to add it to your own keystore? [no]: **yes**
 #### import any intermediate certificates:
 ~~~
 keytool -import -trustcacerts -alias intermed -keystore nsderp.navy.mil.bd.jks -file /etc/ssl/cert2023/DigiCertCA.crt
