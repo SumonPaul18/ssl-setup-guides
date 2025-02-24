@@ -178,5 +178,5 @@ keytool -delete -alias mydomain -keystore nsderp.navy.mil.bd.jks [select your ke
 ---
 ### Reference:
 1. [SSL Install in Tomcat on Linux](https://www.ssltrust.com.au/help/setup-guides/apache-tomcat-ssl-install-guide)
-  - [Video](https://www.youtube.com/watch?v=ZWtAbqql6Vg&t=1170s)
+    - [Video](https://www.youtube.com/watch?v=ZWtAbqql6Vg&t=1170s)
 #
