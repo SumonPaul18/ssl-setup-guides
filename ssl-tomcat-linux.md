@@ -176,6 +176,6 @@ keytool -list -keystore nsderp.navy.mil.bd.jks [select your keystore .jks file]
 keytool -delete -alias mydomain -keystore nsderp.navy.mil.bd.jks [select your keystore .jks file]
 ~~~
 ---
-Reference:
+### Reference:
 1.[SSL Install in Tomcat on Linux ](https://www.ssltrust.com.au/help/setup-guides/apache-tomcat-ssl-install-guide)
 #
